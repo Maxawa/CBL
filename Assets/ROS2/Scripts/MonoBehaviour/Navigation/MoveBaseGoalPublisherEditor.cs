@@ -1,19 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-
-[CustomEditor(typeof(MoveBaseGoalPublisher))]
-public class MoveBaseGoalPublisherEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        MoveBaseGoalPublisher moveBaseGoalPublisher = (MoveBaseGoalPublisher)target;
-        if (GUILayout.Button("Send Navigation Goal"))
-        {
-            moveBaseGoalPublisher.PublishNavigationGoal();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:ea5b7d840fc5825ec50e3328b79e33c3526867c76f9d72483019a4fbbd1ea952
+size 507

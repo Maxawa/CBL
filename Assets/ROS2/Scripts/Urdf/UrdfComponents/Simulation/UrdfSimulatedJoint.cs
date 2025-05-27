@@ -1,17 +1,3 @@
-﻿/*
-© Dyno Robotics, 2019
-Author: Samuel Lindgren (samuel@dynorobotics.se)
-Licensed under the Apache License, Version 2.0
-*/
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace RosSharp.Urdf
-{
-    public class UrdfSimulatedJoint : MonoBehaviour
-    {
-        public JointTypes JointType;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7426c6f75079198325631822294d4c4e99163aad0e325acccc6c54cd221cd3e3
+size 338

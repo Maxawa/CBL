@@ -1,21 +1,3 @@
-﻿/*
-© Dyno Robotics, 2019
-Author: Samuel Lindgren (samuel@dynorobotics.se)
-Licensed under the Apache License, Version 2.0
-*/
-
-using System.Collections.Generic;
-
-namespace RosSharp.Urdf
-{
-    // NOTE(sam): Would make sense to use Reflection (Type.GetType) for this, but does not seem to work...
-    public static class UrdfCustomComponentTypes
-    {
-       public static Dictionary<string, System.Type> Dictionary = new Dictionary<string, System.Type>
-       {
-           {"TwistBaseController", typeof(TwistBaseController) },
-           {"LaserScanner2D", typeof(LaserScanner2D) },
-           {"GroundTruthOdometry", typeof(GroundTruthOdometry) }
-       };
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:0d10eda0865ec35ac32711982fe3de667769529837ea8307920add99c6a522ff
+size 668

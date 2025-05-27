@@ -1,25 +1,3 @@
-using RosMessageTypes.Geometry;
-using RosMessageTypes.Std;
-using Unity.Robotics.Core;
-using Unity.Robotics.ROSTCPConnector.ROSGeometry;
-using UnityEngine;
-
-public static class TransformExtensions
-{
-
-    public static TransformMsg ToROSTransform(this Transform tfUnity)
-    {
-        return new TransformMsg(
-            // Using vector/quaternion To<>() because Transform.To<>() doesn't use localPosition/localRotation
-            tfUnity.localPosition.To<FLU>(),
-            tfUnity.localRotation.To<FLU>());
-    }
-
-    public static TransformStampedMsg ToROSTransformStamped(this Transform tfUnity, double timeStamp)
-    {
-        return new TransformStampedMsg(
-            new HeaderMsg(new TimeStamp(timeStamp), tfUnity.parent.gameObject.name),
-            tfUnity.gameObject.name,
-            tfUnity.ToROSTransform());
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:cf0202ad2e8c943c54af4feb5e87e29cd8089a9654955e1b2e9eb22e6ac1c7e3
+size 834

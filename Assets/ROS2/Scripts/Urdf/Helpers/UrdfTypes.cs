@@ -1,16 +1,3 @@
-﻿/*
-© Dyno Robotics, 2019
-Author: Samuel Lindgren (samuel@dynorobotics.se)
-Licensed under the Apache License, Version 2.0
-*/
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace RosSharp.Urdf
-{
-    public enum GeometryTypes { Box, Cylinder, Sphere, Mesh }
-    public enum JointTypes { Revolute, Continuous, Prismatic, Fixed, Floating, Planar  }
-}
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:3046188bd1a770a8684c2038d181bd0315dd9e2d7e9fdc8081133905734c7b71
+size 389

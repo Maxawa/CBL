@@ -1,35 +1,3 @@
-using UnityEngine;
-
-public class ObstacleCounter : MonoBehaviour
-{
-    public LayerMask obstacleLayer;
-
-    void Start()
-    {
-        CountObstacles();
-    }
-
-    void CountObstacles()
-    {
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-        int obstacleCount = 0;
-
-        foreach (GameObject go in allObjects)
-        {
-            if (go.activeInHierarchy && ((1 << go.layer) & obstacleLayer) != 0)
-            {
-                obstacleCount++;
-            }
-        }
-
-        Debug.Log("There are " + obstacleCount + " obstacles in the scene.");
-        if (obstacleCount > 5)
-        {
-        Debug.Log("Obstacle density is high. Use Dijkstra");
-        }
-        else
-        {
-        Debug.Log("Obstacle density is sparse. Use A*");
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:87467f6705a5ccf504bc4c0455f7b94d8ead98f8d2ffa949b15d78bf79b758ca
+size 798

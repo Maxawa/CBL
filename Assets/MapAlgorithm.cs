@@ -1,27 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using ROS2.Interfaces;
-using RosMessageTypes.Nav;
-using Unity.Robotics.ROSTCPConnector;
-using UnityEngine;
-
-//Part of this code is adapted from OccupancyGridDefaultVisualizer.cs
-public class MapAlgorithm : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        string topic = "/map";
-       // ROSConnection.GetOrCreateInstance().Subscribe<OccupancyGridMsg>(topic, AddMessage);
-    }
-
-    public void AddMessage(Message message)
-    {
-      //  message = (OccupancyGridMsg)message;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2c6d90d8e3bd9eb144f67634cfbd0c904f15e25ff902133d55701fb2eeddc729
+size 692
