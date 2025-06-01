@@ -11,7 +11,7 @@ Setup and usage:
 - [Expected usage](#expected-usage)
 
 ### Docker ROS2 workspace setup
-[This gist by AEAEAEAE4343](https://gist.github.com/AEAEAEAE4343/4429cc35d7bd02cdffe0442711fb1d28) is extremely helpful in setting up Docker/Unity (instead of VM/Unity or Docker/Gazebo). Follow its steps before continuing the setup, most notably:
+This [gist by AEAEAEAE4343](https://gist.github.com/AEAEAEAE4343/4429cc35d7bd02cdffe0442711fb1d28) is extremely helpful in setting up Docker/Unity (instead of VM/Unity or Docker/Gazebo). Follow its steps before continuing the setup, most notably:
 1. Have Docker Desktop working
 2. Build the image `2irr10_custom` from the given Dockerfile (once)
 3. Create a container from this build image
