@@ -29,6 +29,8 @@ You can now run `ros2 launch unity_slam_example unity_slam_example.py` inside yo
 ### Exploration setup
 Similar to `unity_slam_example`, import the `explore` folder from the [m-explore-ros2 repo](https://github.com/robo-friends/m-explore-ros2) into the `src` of your ROS2 workspace.
 
+in a terminal, go to the root of your ros workspace and run colcon build, then source install/local_setup.bash
+
 You can now run `ros2 launch explore_lite explore.launch.py` inside your container, after playing the Unity Project and launching Nav2. The robot should start exploring.
 
 > IMPORTANT:
