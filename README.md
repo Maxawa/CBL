@@ -84,12 +84,12 @@ Once you have explored the environment autonomously once, press P to save the co
 6. In the third terminal, run `ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml`
 7. Rviz should have opened up. In it, click the + icon, select SetGoal and click OK.
 8. Load scene 'test' in unity, and click play.
-9. Manually move the robot with the keyboard (or move around the capsule in the unity scene that the robot follows) until the costmap is fully made.
+9. Load the full costmap in. To do this you probably will have to fiddle around with navigation.cs (attached to the main camera), prevent it from publishing messages so the turtlebot can move. reenable it afterwards of course.
 10. Press P to save the costmap
 11. Stop playing in unity and press ctrl c in all your terminals to stop execution on them.
 12. run the programs in your terminals again and press play in unity again
 13. Rviz should have opened up. In it, click the + icon, select SetGoal and click OK.
-14. You should see the difference map appear in the top right whenever the costmap updates (move the turtlebot to see it update)
+14. You should see the difference map appear in the top right whenever the costmap updates. If navigation.cs is active, the turtlebot should try to navigate towards it. it will quickly find that the goal is inside of an obstacle and fail, however.
 
 ## Member list
 Members (GitHub usernames):
