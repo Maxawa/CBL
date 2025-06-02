@@ -75,6 +75,21 @@ Once you have explored the environment autonomously once, press P to save the co
 > TODO: write a usage guide for using comparison
 
 > TODO: write usage guides for the remaining set of features
+# Heres how to use and test the bot in unity, most of this is also applicable to the physical robot.
+1. Ensure docker is running and your container is running.
+2. Ensure that you have setup unity_slam_example.
+3. Open three terminals and run `docker exec -it [container name] bash' in each of them.
+4. In the first terminal, run `ros2 run ros_tcp_endpoint default_server_endpoint`
+5. In the second terminal, run `ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True`
+6. In the third terminal, run `ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml`
+7. Rviz should have opened up. In it, click the + icon, select SetGoal and click OK.
+8. Load scene 'test' in unity, and click play.
+9. Manually move the robot with the keyboard (or move around the capsule in the unity scene that the robot follows) until the costmap is fully made.
+10. Press P to save the costmap
+11. Stop playing in unity and press ctrl c in all your terminals to stop execution on them.
+12. run the programs in your terminals again and press play in unity again
+13. Rviz should have opened up. In it, click the + icon, select SetGoal and click OK.
+14. You should see the difference map appear in the top right whenever the costmap updates (move the turtlebot to see it update)
 
 ## Member list
 Members (GitHub usernames):
