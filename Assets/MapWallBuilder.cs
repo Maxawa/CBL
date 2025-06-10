@@ -1,118 +1,69 @@
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class MapWallBuilder : MonoBehaviour
 {
-    [Tooltip("Texture")]
-    public Texture2D mapTexture;
+    public Texture2D mapTex;
+    public float res = 0.05f;
+    public float height = 2f;
+    public float darkThreshold = 0.4f;
+    public int step = 1;
+    public Color color = Color.gray;
 
-    [Tooltip("resolution in .yaml file")]
-    public float cellSize = 0.05f;
-
-    [Tooltip("Height of walls")]
-    public float wallHeight = 2f;
-
-    [Range(0f, 1f), Tooltip("Darkness threshold")]
-    public float darknessThreshold = 0.4f;
-
-    [Tooltip("Group size")]
-    public int blockSize = 1;
-
-    [Tooltip("Wall color")]
-    public Color wallColor = Color.gray;
-
-    void Start()
+    public void GenerateWalls()
     {
-        if (mapTexture == null)
+        var children = transform.childCount;
+        for (int i = children - 1; i >= 0; i--)
         {
-            Debug.LogError("Assign mapTexture");
-            return;
+            #if UNITY_EDITOR
+                        DestroyImmediate(transform.GetChild(i).gameObject);
+            #else
+                        Destroy(transform.GetChild(i).gameObject);
+            #endif
         }
 
-        int W = mapTexture.width;
-        int H = mapTexture.height;
-        float worldWidth  = W * cellSize;
-        float worldHeight = H * cellSize;
+        if (!mapTex) return;
 
-        var floor = GameObject.Find("MapFloor");
-        if (floor != null)
-        {
-            floor.transform.localScale = new Vector3(worldWidth / 10f, 1f, worldHeight / 10f);
-            floor.transform.position   = Vector3.zero;
-            floor.transform.rotation   = Quaternion.identity;
-        }
-        else
-        {
-            Debug.LogWarning("GameObject not found");
-        }
+        int w = mapTex.width;
+        int h = mapTex.height;
+        float xOff = -w * res / 2f;
+        float zOff = -h * res / 2f;
 
-        float originOffsetX = -worldWidth  * 0.5f;
-        float originOffsetZ = -worldHeight * 0.5f;
-        int placed = 0;
-        for (int bx = 0; bx < W; bx += blockSize)
+        for (int i = 0; i < w; i += step)
         {
-            for (int by = 0; by < H; by += blockSize)
+            for (int j = 0; j < h; j += step)
             {
-                bool isObstacle = false;
-                int bw = Mathf.Min(blockSize, W - bx);
-                int bh = Mathf.Min(blockSize, H - by);
+                bool foundDark = false;
 
-                for (int dx = 0; dx < bw && !isObstacle; dx++)
+                for (int dx = 0; dx < step && !foundDark; dx++)
                 {
-                    for (int dy = 0; dy < bh; dy++)
+                    for (int dy = 0; dy < step; dy++)
                     {
-                        if (mapTexture.GetPixel(bx + dx, by + dy).grayscale < darknessThreshold)
+                        int px = i + dx;
+                        int py = j + dy;
+                        if (px >= w || py >= h) continue;
+
+                        var pixel = mapTex.GetPixel(px, py);
+                        if (pixel.grayscale < darkThreshold)
                         {
-                            isObstacle = true;
+                            foundDark = true;
                             break;
                         }
                     }
                 }
 
-                if (!isObstacle) continue;
+                if (!foundDark) continue;
 
-                float localX = (bx + bw * 0.5f) * cellSize;
-                float localZ = (by + bh * 0.5f) * cellSize;
-                float worldX = originOffsetX + localX;
-                float worldZ = originOffsetZ + localZ;
+                float pxMid = (i + step / 2f) * res + xOff;
+                float pzMid = (j + step / 2f) * res + zOff;
+                Vector3 pos = new Vector3(pxMid, height / 2f, pzMid);
+                Vector3 scl = new Vector3(step * res, height, step * res);
 
-                Vector3 pos   = new Vector3(worldX, wallHeight * 0.5f, worldZ);
-                Vector3 scale = new Vector3(bw * cellSize, wallHeight, bh * cellSize);
-
-                var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                cube.transform.parent       = transform;
-                cube.transform.localPosition = pos;
-                cube.transform.localScale    = scale;
-
-                var rend = cube.GetComponent<Renderer>();
-                rend.material.color = wallColor;
-
-                placed++;
+                GameObject block = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                block.transform.parent = transform;
+                block.transform.localPosition = pos;
+                block.transform.localScale = scl;
+                block.GetComponent<Renderer>().material.color = color;
             }
         }
     }
-
-    void OnDisable()
-    {
-        for (int i = transform.childCount - 1; i >= 0; i--)
-        {
-            var child = transform.GetChild(i).gameObject;
-            #if UNITY_EDITOR
-            DestroyImmediate(child);
-            #else
-            Destroy(child);
-            #endif
-        }
-    }
-
-    #if UNITY_EDITOR
-    public void GenerateWallsInEditor()
-    {
-        OnDisable();
-        Start();
-    }
-    #endif
-
 }
