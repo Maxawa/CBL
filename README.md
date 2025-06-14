@@ -68,28 +68,16 @@ Four important notes with using exploration are:
 
 Once you have explored the environment autonomously once, press P to save the costmap. Then we assume that something in the environment might have changed, so we explore again.
 
-> TODO: research `explore-lite` for the physical bot
-
-> TODO: improve the "Expected usage" subtopic
-
-> TODO: write a usage guide for using comparison
-
-> TODO: write usage guides for the remaining set of features
-# Heres how to use and test the bot in unity, most of this is also applicable to the physical robot.
-1. Ensure docker is running and your container is running.
-2. Ensure that you have setup unity_slam_example.
-3. Open three terminals and run `docker exec -it [container name] bash' in each of them.
-4. In the first terminal, run `ros2 run ros_tcp_endpoint default_server_endpoint`
-5. In the second terminal, run `ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True`
-6. In the third terminal, run `ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml`
-7. Rviz should have opened up. In it, click the + icon, select SetGoal and click OK.
-8. Load scene 'test' in unity, and click play.
-9. Load the full costmap in. To do this you probably will have to fiddle around with navigation.cs (attached to the main camera), prevent it from publishing messages so the turtlebot can move. reenable it afterwards of course.
-10. Press P to save the costmap
-11. Stop playing in unity and press ctrl c in all your terminals to stop execution on them.
-12. run the programs in your terminals again and press play in unity again
-13. Rviz should have opened up. In it, click the + icon, select SetGoal and click OK.
-14. You should see the difference map appear in the top right whenever the costmap updates. If navigation.cs is active, the turtlebot should try to navigate towards it. it will quickly find that the goal is inside of an obstacle and fail, however.
+# Instructions to run
+1. Run ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=ROSIP (ros args are unneeded if using docker)
+2. ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True slam_params_file:=INSERTPATH/mapper_params_online_async.yaml  (use slam params if needed, probably wont though)
+3. Control the robot with ros2 run turtlebot3_teleop teleop_keyboard
+4. ros2 run nav2_map_server map_saver_cli -f ~/map  to save the map
+5. Close slam toolbox and run ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml
+6. drive around until the costmap is fully filled in, then press p in unity to save it.
+7. restart the unity simulation, change something in the enviroment.
+8. restart navigation2
+9. the robot should detect stuff.
 
 ## Member list
 Members (GitHub usernames):
