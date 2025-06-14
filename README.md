@@ -74,10 +74,11 @@ Once you have explored the environment autonomously once, press P to save the co
 3. Control the robot with ros2 run turtlebot3_teleop teleop_keyboard
 4. ros2 run nav2_map_server map_saver_cli -f ~/map  to save the map
 5. Close slam toolbox and run ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml
-6. drive around until the costmap is fully filled in, then press p in unity to save it.
-7. restart the unity simulation, change something in the enviroment.
-8. restart navigation2
-9. the robot should detect stuff.
+6. ros2 param set /global_costmap/global_costmap inflation_layer.inflation_radius 0.30
+7. drive around until the costmap is fully filled in, then press p in unity to save it.
+8. restart the unity simulation, change something in the enviroment.
+9. restart navigation2
+10. the robot should detect stuff.
 
 ## Member list
 Members (GitHub usernames):
