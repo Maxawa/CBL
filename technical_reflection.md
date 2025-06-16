@@ -6,11 +6,13 @@ Contents:
 - [State Synchronization](#state-synchronization)
 - [Environmental & Object Interaction](#environmental--object-interaction)
 
-Username: 
+Username: team22
 Password: SadSmiley22
 
 ## Bidirectional Communication
 Lorem
+
+<img src="simplified bidirectional comm outlined.png" width="320" height="203" />
 
 ## State Synchronization
 Ip
