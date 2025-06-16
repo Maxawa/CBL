@@ -69,16 +69,17 @@ Four important notes with using exploration are:
 Once you have explored the environment autonomously once, press P to save the costmap. Then we assume that something in the environment might have changed, so we explore again.
 
 # Instructions to run
-1. Run ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=ROSIP (ros args are unneeded if using docker)
-2. ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True slam_params_file:=INSERTPATH/mapper_params_online_async.yaml  (use slam params if needed, probably wont though)
-3. Control the robot with ros2 run turtlebot3_teleop teleop_keyboard
-4. ros2 run nav2_map_server map_saver_cli -f ~/map  to save the map
-5. Close slam toolbox and run ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml
-6. ros2 param set /global_costmap/global_costmap inflation_layer.inflation_radius 0.30
-7. drive around until the costmap is fully filled in, then press p in unity to save it.
-8. restart the unity simulation, change something in the enviroment.
-9. restart navigation2
-10. the robot should detect stuff.
+1. Run `ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=ROSIP` (ros args are unneeded if using docker)
+2.` ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True slam_params_file:=INSERTPATH/mapper_params_online_async.yaml`  (use slam params if needed, probably wont though)
+3. Control the robot with `ros2 run turtlebot3_teleop teleop_keyboard`
+4. `ros2 run nav2_map_server map_saver_cli -f ~/map`  to save the map
+5. Close slam toolbox and run `ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml`
+6. `ros2 param set /global_costmap/global_costmap inflation_layer.inflation_radius 0.30`
+7. make sure the autonomous navigation checkbox in ObstructionProcessor is unchecked
+8. drive around until the costmap is fully filled in, then press p in unity to save it.
+9. restart the unity simulation, change something in the enviroment and check autonomous navigation.
+10. restart navigation2
+11. the robot should detect stuff.
 
 ## Member list
 Members (GitHub usernames):
