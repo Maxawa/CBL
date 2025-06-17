@@ -75,9 +75,8 @@ Once you have explored the environment autonomously once, press P to save the co
 4. `ros2 run nav2_map_server map_saver_cli -f ~/map`  to save the map
 5. Close slam toolbox and run `ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml`
 6. `ros2 param set /global_costmap/global_costmap inflation_layer.inflation_radius 0.30`
-7. make sure the autonomous navigation checkbox in ObstructionProcessor is unchecked
 8. drive around until the costmap is fully filled in, then press p in unity to save it.
-9. restart the unity simulation, change something in the enviroment and check autonomous navigation.
+9. restart the unity simulation, change something in the enviroment and hold E.
 10. restart navigation2
 11. the robot should detect stuff.
 
