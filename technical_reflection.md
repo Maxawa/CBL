@@ -18,7 +18,7 @@ The coordinates of these differences are then passed on back to the real TurtleB
 
 <img src="simplified bidirectional comm outlined.png" width="320" height="203" />
 
-This data exchange is established using our Unity implementation in combination with ROS 2.
+This data exchange is established using Unity in combination with ROS 2.
 
 ### Achievements
 The digital twin receives real sensor data through ROS 2 in the form of costmaps, and it is able to save these.
@@ -28,6 +28,7 @@ It is then able to navigate to these coordinates, afterwards notifying the user 
 ### Not completed
 The physical TurtleBot does not communicate camera data to the virtual side, as we have not integrated the RPi-camera with the TurtleBot.
 This meant that the digital twin receives less data from the physical twin, and so it has less information to generate a response back to the real robot.
+We were also unable to implement a camera to take pictures of the area due to time constraints.
 
 ### Challenges faced
 The Docker image we used to simulate a ROS 2 workspace was facing issues connecting to Unity, hindering the data exchange until we found a fix.
@@ -36,32 +37,28 @@ This hindered bidirectional communication as we could not test the first part of
 Lastly, Unity tried to send sensor data to our implementation, which interfered with processing the right sensor data.
 This resulted in incorrect navigation goals being set, which momentarily confused us during development.
 
-### What could be improved
+### What could be improved/expanded
 The user experience of our current implementation is still quite technical, 
 as it requires multiple separate Linux command-line interfaces and multiple programs to run in synchronization.
 To a safety inspector, our current implementation may not be immediately intuitive, which is something we want to avoid.
 A better interface would be a single GUI consisting of visualizations, relevant settings and commands the user could make use of to control the system.
+With a few more weeks, it would be possible to implement the camera system as initially planned.
 
-### What could be expanded
-- Something about updating the navigation goal based on camera data/AI obstacle recognition?
-- TODO
 
 ## State Synchronization
 ### Achievements
-- The digital twin listens to the same navigation as the physical twin
-- There is no noticeable inconsistency between the relative positions of the twins
-- TODO
+The digital twin listens to the same navigation commands as the physical twin, and moves similarily
 
 ### Not completed 
-- TODO
+The friction and damping values of the physical and digital turtlebot appear to be different.
+Additionally, the starting position of the digital turtlebot does not necessarily match that of the physical twin.
 
 ### Challenges faced 
-- TODO
+The Unity project given by the course had several bugs in it, costing a lot of time: 
+  - The /tf topic did not work because of a missing component on the base_footprint GameObject
+  - The movement of the digital twin did not work, because of faulty if-else statements in its navigation code.
 
-### What could be improved
-- TODO
-
-### What could be expanded
+### What could be improved/expanded
 - TODO
 
 ## Environmental & Object Interaction
@@ -71,20 +68,12 @@ There is a system to filter noise out of the comparison map, involving a blur fi
 The map comparison algorithm runs extremely fast, as there is no obvious impact on performance and no noticeable delay in response by the navigation.
 Functions have been written to convert between Unity coordinates and relative ROS2 navigation coordinates.
 
-### Not completed
-- Camera documenting changes
-- Multiple change detection and navigation to each change
-- TODO
-
 ### Challenges faced
 - Bottleneck: time to implement the not completed above
 - TODO
 
-### What could be improved
+### What could be improved/expanded
 - Trial and error in lab sessions, to find the most reliable parameters and tresholds
-- TODO
-
-### What could be expanded
 - AI obstacle recognition
 - Delivering equipment to obstacles as a form of object interaction
 - TODO
