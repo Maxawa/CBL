@@ -69,7 +69,7 @@ With more time, we could correct the starting position of the digital turtlebot 
 The movements of the twins could also be more finely tuned to match well.
 
 ## Environmental & Object Interaction
-<img src="map_comparison.png" width="320" height="203" />
+<img src="map_comparison.png" width="640" height="400" />
 The digital twin compares the old baseline map (middle) with the newly scanned map (left) and displays the results in an image (right).
 A capsule has been teleported to the location of the obstacle that has been found in the unity scene.
 
