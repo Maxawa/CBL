@@ -50,28 +50,28 @@ With a few more weeks, it would be possible to implement the camera system as in
 
 ## State Synchronization
 ### Achievements
-The digital twin listens to the same navigation commands as the physical twin, and moves similarily
+The digital twin listens to the same navigation commands as the physical twin, and moves similarily.
 
 ### Not completed 
-The friction and damping values of the physical and digital turtlebot appear to be different. 
+The friction and damping values of the physical and digital TurtleBot appear to be different. 
 However, it is not as simple as just these values being wrong, these are just the best comparison.
-Additionally, the starting position of the digital turtlebot does not necessarily match that of the physical twin.
+Additionally, the starting position of the digital TurtleBot does not always match that of the physical twin.
 
 ### Challenges faced 
-The Unity project given by the course had several bugs in it, costing a lot of time: 
-  - The /tf topic did not work because of a missing component on the base_footprint GameObject.
-        This was resolved by finding the correct component to add by looking at a different example project.
-  - The movement of the digital twin did not work, because of faulty if-else statements in its navigation code.
-        A fix to the if-else statement resolved this issue
+The Unity project given by the course had several bugs in it, costing us a lot of time during early development.
+Firstly, the `/tf` topic did not work because of a missing component on the `base_footprint` GameObject.
+This was resolved by finding the correct component to add by looking at a different example Unity project.
+Secondly, the movement of the digital twin did not work, because of faulty if-else statements in its navigation code.
+Noticing and fixing this error in the logic resolved this issue
     
 ### What could be improved/expanded
-With more time, we could correct the starting position of the digital turtlebot (properly synchronizing according to the `/tf` topic).
-The movements of the twins could also be more finely tuned to match well.
+With more time, we could correct the starting position of the digital TurtleBot (properly synchronizing according to the `/tf` topic).
+The movements of the twins could also be more finely tuned to match well, this can be done through trial and error given additional lab time.
 
 ## Environmental & Object Interaction
 <img src="map_comparison.png" width="640" height="400" />
-The digital twin compares the old baseline map (middle) with the newly scanned map (left) and displays the results in an image (right).
-A capsule has been teleported to the location of the obstacle that has been found in the unity scene.
+The digital twin compares the newly scanned map (left) with the old baseline map (middle) and displays the results in an image (right).
+A digital capsule object in the Unity scene has been teleported to the location of the found obstacle.
 
 ### Achievements
 The digital twin can accurately compare two full maps of the environment, and it reliably locates changes between the two.
@@ -81,16 +81,20 @@ Functions have been written to convert between Unity coordinates and relative RO
 
 ### Challenges faced
 We initially faced issues with the accuracy of SLAM maps. The resolution was simply not high enough to accurately compare new obstacles. Increasing the resolution of the SLAM map also added too much noise to comfortably deal with.
-Eventually, the solution was found to be to use the costmap, which is a version of the map used by the navigation package instead, as it offered much better visibility for obstacles.
-When initially comparing the maps, we were met with large performance issues. The CPU was simply not fast enough to iterate over all the pixels of a 512 x 512 texture every map update without noticeable performance stutter.
+Eventually, the solution we came up with was to use the costmap, which is a version of the map used by the navigation package, instead.
+This offered much more reliable detection of obstacles.
+
+When initially comparing the maps, we were met with large performance issues. 
+The CPU was simply not fast enough to iterate over all the pixels of a 512 x 512 texture every map update without noticeable performance stutter.
 The performance issue was resolved by switching to compute shaders, which offload the calcualations to the GPU, which is much faster for this application. This also allowed us to implement fairly extensive filtering at no noticeable performance cost.
 
-We found that the turtlebot's navigation simply did not work when placed in a small area, which was resolved by simply making the area bigger and by changing the `inflation_radius` parameter in ros.
+We found that the TurtleBot's navigation simply did not work when placed in a small area, which was resolved by simply making the testing environment bigger, and by changing the `inflation_radius` parameter in ROS.
+
 Our final challenge was converting from the coordinates of a pixel on the texture of the map to Unity coordinates, and from Unity coordinates to the coordinates used by the navigation package.
 The messages published to the map topic contained data about its location, which was used to convert from texture coordinates to Unity coordinates,
-and Unity turned out to have a built in function to convert from their coordinate system to that of ros2 navigation.
+and Unity turned out to have a built in function to convert from their coordinate system to that of ROS2 navigation.
 
 ### What could be improved/expanded
-With some more time, we could find more optimal parameters for the map resolution and the navigation inflation_radius. We could also
-change the code to support finding multiple obstacles and including the detection of removed obstacles (currently, the code only detects obstacles that have been newly added).
-If a camera were to be implemented, that could also be used to aid in obstacle detection (through image recognition algorithms).
+With some more time, we could find more optimal parameters for the map resolution and the navigation `inflation_radius`, again through trial and error.
+We could also change the code to support finding multiple obstacles, and we could include the detection of removed obstacles (currently, the code only detects obstacles that have been newly added since scanning the baseline map).
+If a camera were to be implemented, that could also be used to aid in obstacle detection (through an (AI) image recognition algorithm).
