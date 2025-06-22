@@ -69,6 +69,10 @@ With more time, we could correct the starting position of the digital turtlebot 
 The movements of the twins could also be more finely tuned to match well.
 
 ## Environmental & Object Interaction
+<img src="map_comparison.png" width="320" height="203" />
+The digital twin compares the old baseline map (middle) with the newly scanned map (left) and displays the results in an image (right).
+A capsule has been teleported to the location of the obstacle that has been found in the unity scene.
+
 ### Achievements
 The digital twin can accurately compare two full maps of the environment, and it reliably locates changes between the two.
 There is a system to filter noise out of the comparison map, involving a blur filter and thresholds to decide what is noise and what is significant change. 
