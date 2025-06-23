@@ -20,11 +20,13 @@ We assume you have a ros enviroment setup.
 5. `ros2 run nav2_map_server map_saver_cli -f ~/map`  to save the map
 6. Close the mapping software and run `ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml`
 7. run `ros2 param set /global_costmap/global_costmap inflation_layer.inflation_radius 0.30`
-8. drive around until the costmap is fully filled in, then press p in unity to save it.
-9. stop the unity simulation and add an obstacle to the enviroment.
-10. Start the unity simulation again.
-11. restart navigation2, and hold the E key in Unity.
-12. the robot should behave correctly.
+8. set the pose estimate in navigation. The costmap should be fully filled in, so press p in unity to save it.
+10. stop the unity simulation and add an obstacle to the enviroment.
+11. Start the unity simulation again.
+12. restart navigation2
+13. Set the pose estimate
+14. Hold the E key in Unity.
+15. The robot should behave correctly.
 
 ### Expected Behaviour
 <img src="map_comparison.png" width="640" height="400" />
